@@ -1,0 +1,26 @@
+<h2>Моя корзина</h2>
+<% if !@order.nil? %>
+    <div>
+        <ul>
+            <% @order.order_items.each do |item| %>
+                <li>
+                    <%= item.product.name %>: <%= item.quantity %>
+                </li>
+            <% end %>
+        </ul>
+        <p>
+            <%= @order.created_at.strftime("От %m.%d.%Y") %>
+        </p>
+        <p>
+            Сумма: <%= @sum %> ₽
+        </p>
+        <%= form_with url: orders_complete_path do |form|%>
+            <%= form.hidden_field :order_id, value: @order.id %>
+            <%= form.submit "Оплатить" %>
+        <% end %>
+    </div>
+<% else %>
+    <p><em>В вашей корзине пусто, вернитесь в каталог, чтобы добавить книги </em>😱</p>
+<% end %>
+
+<%= link_to '<< Вернуться в каталог', products_index_path %>

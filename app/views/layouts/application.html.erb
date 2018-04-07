@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Книжный магазин</title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+  <% if user_signed_in? %>
+      <p>
+        Вы вошли как <strong><%= current_user.email %></strong> | 
+        <%= link_to('Выйти', destroy_user_session_path, method: :delete) %>
+      </p>
+  <% else %>
+      <%= link_to('Войти', new_user_session_path)  %>
+  <% end %>
+  <%= yield %>
+</body>
+</html>

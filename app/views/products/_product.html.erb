@@ -1,0 +1,12 @@
+<div class="product">
+    <strong>
+        <%= product.name %>
+    </strong>
+    <%= product.price %> ₽
+    <% if user_signed_in? %>
+        <%= form_with url: products_add_path, class: 'add-form' do |form|%>
+            <%= form.hidden_field :product_id, value: product.id %>
+            <%= form.submit("Добавить") %>
+        <% end %>
+    <% end %>
+</div>
